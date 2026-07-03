@@ -10,3 +10,5 @@ productRouter.put("/:productId",updateProduct);
 productRouter.get("/:productId",getProductById);
 
 export default productRouter;
+
+//Testing
