@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import studentRouter from "./routers/StudentRouter.js";
 import userRouter from "./routers/userRouter.js";
 import jwt from "jsonwebtoken";
 import authenticateUser from "./middlewears/authentication.js";
@@ -23,7 +22,6 @@ app.use(express.json())
 
 app.use(authenticateUser) 
   
-app.use("/students",studentRouter)
 app.use("/users", userRouter)
 app.use("/products",productRouter)
 
