@@ -4,10 +4,14 @@ import userRouter from "./routers/userRouter.js";
 import jwt from "jsonwebtoken";
 import authenticateUser from "./middlewears/authentication.js";
 import productRouter from "./routers/productRouter.js";
+import cors from 'cors';
+import dotenv from "dotenv";
+
+dotenv.config()
 
 const app = express()
 
-const mongodbURI = "mongodb+srv://admin:1234@cluster0.9vzzpan.mongodb.net/icomputers?appName=Cluster0"
+const mongodbURI = process.env.MONGO_URI
 
 mongoose.connect(mongodbURI).then(
     ()=>{
@@ -18,12 +22,13 @@ mongoose.connect(mongodbURI).then(
     process.exit(1)
     })
 
+app.use(cors())    
 app.use(express.json())
 
 app.use(authenticateUser) 
   
-app.use("/users", userRouter)
-app.use("/products",productRouter)
+app.use("/api/users", userRouter)
+app.use("/api/products",productRouter)
 
 app.put("/",(req,res)=>{
     console.log("Put request recieved"); 

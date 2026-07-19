@@ -1,4 +1,7 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default function authenticateUser(req,res,next){
 
@@ -6,7 +9,7 @@ export default function authenticateUser(req,res,next){
        
            if(header != null){
                const token = header.replace("Bearer ","")
-               jwt.verify(token, "icomputersbatch10", (error, decoded) => {
+               jwt.verify(token, JWT_SECRET, (error, decoded) => {
                    if (error) { // Check whether there is an error
                       res.status(401).json({  
                       message: "Invalid token, please login again" // Send a message if the token is invalid or expired
